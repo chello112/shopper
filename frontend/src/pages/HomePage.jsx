@@ -5,6 +5,7 @@ import Paginate from "../components/Paginate";
 import Product from "../components/Product";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
+import ProductCarousel from "../components/ProductCarousel";
 
 const HomePage = () => {
   const { keyword, pageNumber } = useParams();
@@ -16,9 +17,11 @@ const HomePage = () => {
 
   return (
     <>
-      {keyword && (
-        <Link to="/" className="btn btn-light mb-4">
-          To Main Page
+      {!keyword ? (
+        <ProductCarousel />
+      ) : (
+        <Link to="/" className="btn btn-light">
+          Go Back
         </Link>
       )}
       {isLoading ? (
@@ -41,5 +44,4 @@ const HomePage = () => {
     </>
   );
 };
-
 export default HomePage;
