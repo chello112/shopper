@@ -1,20 +1,26 @@
 import { Row, Col } from "react-bootstrap";
 import { useGetProductsQuery } from "../redux/features/productsApiSlice";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Paginate from "../components/Paginate";
 import Product from "../components/Product";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 
 const HomePage = () => {
-  const { pageNumber } = useParams();
+  const { keyword, pageNumber } = useParams();
 
   const { data, isLoading, error } = useGetProductsQuery({
+    keyword,
     pageNumber,
   });
 
   return (
     <>
+      {keyword && (
+        <Link to="/" className="btn btn-light mb-4">
+          To Main Page
+        </Link>
+      )}
       {isLoading ? (
         <Loader />
       ) : error ? (
@@ -29,7 +35,7 @@ const HomePage = () => {
               </Col>
             ))}
           </Row>
-          <Paginate pages={data.pages} page={data.page} />
+          <Paginate pages={data.pages} page={data.page} keyword={keyword ? keyword : ""} />
         </>
       )}
     </>
