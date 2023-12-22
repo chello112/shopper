@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useLoginMutation } from "../redux/features/userApiSlice";
+import { useLoginMutation } from "../redux/features/usersApiSlice";
 import { setCredentials } from "../redux/features/authSlice";
 import { toast } from "react-toastify";
 

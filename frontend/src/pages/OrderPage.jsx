@@ -8,6 +8,7 @@ import {
   useGetOrderDetailsQuery,
   usePayOrderMutation,
   useGetPaypalClientIdQuery,
+  useDeliverOrderMutation,
 } from "../redux/features/orderApiSlice";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
@@ -18,6 +19,8 @@ const OrderPage = () => {
   const { data: order, refetch, isLoading, error } = useGetOrderDetailsQuery(orderId);
 
   const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation();
+
+  const [deliverOrder, { isLoading: loadingDeliver }] = useDeliverOrderMutation();
 
   const { userInfo } = useSelector((state) => state.auth);
 
@@ -81,6 +84,11 @@ const OrderPage = () => {
         return orderID;
       });
   }
+
+  const deliverHandler = async () => {
+    await deliverOrder(orderId);
+    refetch();
+  };
 
   return isLoading ? (
     <Loader />
@@ -189,9 +197,9 @@ const OrderPage = () => {
                     <Loader />
                   ) : (
                     <div>
-                      {/*  <Button style={{ marginBottom: "10px" }} onClick={onApproveTest}>
+                      <Button style={{ marginBottom: "10px" }} onClick={onApproveTest}>
                         Test Pay Order
-                      </Button> */}
+                      </Button>
 
                       <div>
                         <PayPalButtons
@@ -204,7 +212,16 @@ const OrderPage = () => {
                   )}
                 </ListGroup.Item>
               )}
-              {/* {MARK AS DELIVERED PLACEHOLDER} */}
+
+              {loadingDeliver && <Loader />}
+
+              {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                <ListGroup.Item>
+                  <Button type="button" className="btn btn-block" onClick={deliverHandler}>
+                    Mark As Delivered
+                  </Button>
+                </ListGroup.Item>
+              )}
             </ListGroup>
           </Card>
         </Col>

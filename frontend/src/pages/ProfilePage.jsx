@@ -4,7 +4,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { FaTimes } from "react-icons/fa";
 import { toast } from "react-toastify";
-import { useProfileMutation } from "../redux/features/userApiSlice";
+import { useProfileMutation } from "../redux/features/usersApiSlice";
 import { useGetMyOrdersQuery } from "../redux/features/orderApiSlice";
 import { setCredentials } from "../redux/features/authSlice";
 import Message from "../components/Message";
@@ -20,7 +20,7 @@ const ProfilePage = () => {
 
   const { data: orders, isLoading, error } = useGetMyOrdersQuery();
 
-  const [updateProfile, { isLoading: loadingUpdateProfile }] = useProfileMutation();
+  const [updateProfile] = useProfileMutation();
 
   useEffect(() => {
     setName(userInfo.name);

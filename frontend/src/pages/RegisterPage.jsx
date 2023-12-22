@@ -2,12 +2,11 @@ import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import FormContainer from "../components/FormContainer";
-import Loader from "../components/Loader";
-
-import { useRegisterMutation } from "../redux/features/userApiSlice";
+import { useRegisterMutation } from "../redux/features/usersApiSlice";
 import { setCredentials } from "../redux/features/authSlice";
 import { toast } from "react-toastify";
+import FormContainer from "../components/FormContainer";
+import Loader from "../components/Loader";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");

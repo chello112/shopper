@@ -1,5 +1,5 @@
 import { Row, Col } from "react-bootstrap";
-import { useGetProductsQuery } from "../redux/features/productSlice";
+import { useGetProductsQuery } from "../redux/features/productsApiSlice";
 import Product from "../components/Product";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
