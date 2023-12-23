@@ -13,13 +13,14 @@ const authSlice = createSlice({
       localStorage.setItem("userInfo", JSON.stringify(action.payload));
 
       const expirationTime = new Date().getTime() + 60 * 60 * 1000; // 1 hour
-      // const expirationTime = new Date().getTime() + 60 * 1000; // 1 minute (for testing)
+      //const expirationTime = new Date().getTime() + 60 * 1000; // 1 minute (for testing)
       localStorage.setItem("expirationTime", expirationTime);
     },
-    logout: (state, action) => {
+    logout: (state) => {
       state.userInfo = null;
-      localStorage.removeItem("userInfo");
-      localStorage.removeItem("expirationTime");
+      //NOTE: here we need to also remove the cart from storage so the next
+      //logged in user doesn't inherit the previous users cart and shipping
+      localStorage.clear();
     },
   },
 });
